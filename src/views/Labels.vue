@@ -1,13 +1,16 @@
 <template>
   <div>
-    hello labels
-    <Nav></Nav>
+    <Layout>
+    <p>labels</p>
+    </Layout>
   </div>
 </template>
 
 <script>
+import Layout from "@/components/Layout.vue";
 export default {
-    name:"labels",
+  components: { Layout },
+  name: "labels",
 };
 </script>
 
