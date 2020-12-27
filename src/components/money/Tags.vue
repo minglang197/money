@@ -1,25 +1,45 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
+      <li
+        v-for="tag in dataSource"
+        :key="tag"
+        @click="toggle(tag)"
+        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+      >
+        {{ tag }}
+      </li>
     </ul>
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Tags",
-};
+<script lang="ts">
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+@Component
+export default class Tags extends Vue {
+  @Prop() readonly dataSource: string[] | undefined;
+  selectedTags: string[] = [];
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+    this.$emit("update:value", this.selectedTags);
+  }
+  create() {
+    const name = window.prompt("请输入标签名");
+    if (name === "") {
+      window.alert("请输入正确的标签名");
+    } else if (this.dataSource) {
+      this.$emit("update:dataSource", [...this.dataSource, name]);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +58,9 @@ export default {
       margin-right: 11px;
       line-height: 24px;
       margin-top: 5px;
+      &.selected {
+        background: #fac054;
+      }
     }
   }
   .new {

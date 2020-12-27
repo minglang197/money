@@ -7,15 +7,20 @@
   </div>
 </template>
 
+
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-
+import { Component, Watch } from "vue-property-decorator";
 @Component
 export default class Notes extends Vue {
   value = "";
+  @Watch("value")
+  onValueChange(value: string) {
+    this.$emit("update:value", value);
+  }//value的值变化的时候把值传给父组件money上
 }
 </script>
+
 
 <style lang="scss" scoped>
 .notes {
@@ -28,7 +33,7 @@ export default class Notes extends Vue {
     padding-right: 16px;
   }
   input {
-    height: 64px;
+    height: 50px;
     flex-grow: 1;
     background-color: transparent;
     border: none;

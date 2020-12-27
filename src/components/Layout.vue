@@ -3,7 +3,7 @@
     <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <slot></slot>
     </div>
-    <Nav/>
+    <Nav></Nav>
   </div>
 </template>
 
@@ -16,13 +16,13 @@ export default {
 
 
 <style lang="scss" scoped>
-.nav-wrapper {
+.layout-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-.content {
-  flex-grow: 1;
-  overflow: auto;
+  .content {
+    flex-grow: 1;
+    overflow: auto;
+  }
 }
 </style>
