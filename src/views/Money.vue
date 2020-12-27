@@ -24,6 +24,8 @@ import { Component, Watch } from "vue-property-decorator";
 import model from "@/model";
 
 const recordList = model.fetch();
+
+
 @Component({ components: { NumberPad, Tags, Types, Notes } })
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行", "干饭"];
